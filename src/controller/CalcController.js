@@ -19,7 +19,7 @@ class CalcController {
 
     }
 
-    copyToClipboard(){
+    copyToClipboard() {
         let input = document.createElement('input');
 
         input.value = this.displayCalc;
@@ -33,9 +33,9 @@ class CalcController {
         input.remove();
     }
 
-    pasteFromClipboard(){
+    pasteFromClipboard() {
 
-        document.addEventListener('paste', e=>{
+        document.addEventListener('paste', e => {
 
             let text = e.clipboardData.getData('Text');
 
@@ -56,9 +56,9 @@ class CalcController {
         this.setLastNumberToDisplay();
         this.pasteFromClipboard();
 
-        document.querySelectorAll('.btn-ac').forEach(btn=>{
+        document.querySelectorAll('.btn-ac').forEach(btn => {
 
-            btn.addEventListener('dblclick', e=>{
+            btn.addEventListener('dblclick', e => {
 
                 this.toogleAudio();
 
@@ -68,16 +68,16 @@ class CalcController {
     }
 
 
-    toogleAudio(){
+    toogleAudio() {
 
         this._audioOnOff = !this._audioOnOff;
 
     }
 
 
-    playAudio(){
+    playAudio() {
 
-        if (this._audioOnOff ){
+        if (this._audioOnOff) {
 
 
             this._audio.currentTime = 0;
@@ -85,7 +85,7 @@ class CalcController {
 
         }
 
-    }   
+    }
 
     initKeyboard() {
         document.addEventListener('keyup', e => {
@@ -140,9 +140,9 @@ class CalcController {
                 case '9':
                     this.addOp(parseInt(e.key));
                     break;
-                
+
                 case 'c':
-                    if(e.ctrlKey) this.copyToClipboard();
+                    if (e.ctrlKey) this.copyToClipboard();
                     break;
 
 
@@ -195,9 +195,14 @@ class CalcController {
     }
 
     getResult() {
+        try {
+            return eval(this._operation.join(""));
+        } catch (e) {
 
-        return eval(this._operation.join(""));
-
+            setTimeout(() => {
+                this.setError();
+            }, 1);
+        }
     }
 
     calc() {
@@ -446,7 +451,7 @@ class CalcController {
 
     set displayCalc(value) {
 
-        if(value.toString().length > 10){
+        if (value.toString().length > 10) {
             this.setError();
             return false;
 
