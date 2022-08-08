@@ -1,5 +1,7 @@
 class CalcController {
 
+
+    //Método construtor
     constructor() {
 
         this._audio = new Audio('./audio/click.mp3');
@@ -19,6 +21,7 @@ class CalcController {
 
     }
 
+    //Método para criar a opção de copiar o conteudo da calculadora
     copyToClipboard() {
         let input = document.createElement('input');
 
@@ -33,6 +36,8 @@ class CalcController {
         input.remove();
     }
 
+
+    //Método para criar a opção de colar o conteudo para a calculadora
     pasteFromClipboard() {
 
         document.addEventListener('paste', e => {
@@ -44,7 +49,7 @@ class CalcController {
         })
     }
 
-
+    //método que atua na inicialização da aplicação
     initialize() {
 
         this.setDisplayDateTime()
@@ -68,6 +73,8 @@ class CalcController {
     }
 
 
+
+    //método que ativa e desativa o audio
     toogleAudio() {
 
         this._audioOnOff = !this._audioOnOff;
@@ -75,6 +82,7 @@ class CalcController {
     }
 
 
+    //método para tocar o audio
     playAudio() {
 
         if (this._audioOnOff) {
@@ -87,6 +95,8 @@ class CalcController {
 
     }
 
+
+    //Método para adicionar ações para o teclado
     initKeyboard() {
         document.addEventListener('keyup', e => {
 
@@ -153,6 +163,8 @@ class CalcController {
         );
     }
 
+
+    //Método para adicionar os eventos
     addEventListenerAll(element, events, fn) {
 
         events.split(' ').forEach(event => {
@@ -160,6 +172,8 @@ class CalcController {
         })
     }
 
+
+    //Métodos para limpar tudo
     clearAll() {
         this._operation = [];
         this._lastNumber = '';
@@ -168,6 +182,8 @@ class CalcController {
         this.setLastNumberToDisplay();
     }
 
+
+    //Método para limpar a ultima operação/número adicionado
     clearEntry() {
         this._operation.pop();
 
@@ -182,6 +198,8 @@ class CalcController {
         this._operation[this._operation.length - 1] = value;
     }
 
+
+    //Método para saber se é ou nao operação o ultimo insert
     isOperator(value) {
         return (['+', '-', '*', '%', '/'].indexOf(value) > -1);
     }
@@ -205,6 +223,8 @@ class CalcController {
         }
     }
 
+
+    //método de calculo
     calc() {
 
         let last = '';
